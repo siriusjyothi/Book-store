@@ -4,23 +4,23 @@ pipeline {
      }
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockeruser')
-        registry = "mubeen507/book-store"
+        registry = "siriusjyothi/book-store"
     }
     stages{
         stage('Docker Build') {
             steps {
-                sh 'docker build -t mubeen507/book-store .'
+                sh 'docker build -t siriusjyothi/book-store .'
               }
           }
         stage('Docker Login & Push') {
             steps {
 		sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-                sh 'docker push mubeen507/book-store'
+                sh 'docker push siriusjyothi/book-store'
               }
           }
         stage('Remove Docker Images') {
             steps {
-                sh 'docker rmi -f mubeen507/book-store'
+                sh 'docker rmi -f siriusjyothi/book-store'
               }
           }
         stage('Docker Network') {
