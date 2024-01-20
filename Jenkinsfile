@@ -4,7 +4,7 @@ pipeline {
      }
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockeruser')
-        #registry = "siriusjyothi/book-store"
+       
     }
     stages{
         stage('Docker Build') {
@@ -47,17 +47,7 @@ pipeline {
                 }
             }
         }
-       # stage('Running the docker container') {
-           # steps {
-              #  script {
-                #    def existingBookContainer = sh(script: "docker ps -aqf name=book", returnStdout: true).trim()
-                 #   if (existingBookContainer) {
-                   #     sh "docker rm -f ${existingBookContainer}"
-                   # }
-                   # sh 'docker run -dt --name book --network booknetwork -p 80:80 -e DB_SERVERNAME=mysql -e DB_USERNAME=root -e DB_PASSWORD=Qwerty@123 -e DB_NAME=mkbook mubeen507/book-store'
-               # }
-            #}
-       # }
+      
 	
 
     }
