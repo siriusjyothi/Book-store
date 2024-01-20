@@ -4,7 +4,7 @@ pipeline {
      }
     environment {
         DOCKERHUB_CREDENTIALS = credentials('dockeruser')
-        registry = "siriusjyothi/book-store"
+        #registry = "siriusjyothi/book-store"
     }
     stages{
         stage('Docker Build') {
@@ -47,29 +47,18 @@ pipeline {
                 }
             }
         }
-        stage('Running the docker container') {
-            steps {
-                script {
-                    def existingBookContainer = sh(script: "docker ps -aqf name=book", returnStdout: true).trim()
-                    if (existingBookContainer) {
-                        sh "docker rm -f ${existingBookContainer}"
-                    }
-                    sh 'docker run -dt --name book --network booknetwork -p 80:80 -e DB_SERVERNAME=mysql -e DB_USERNAME=root -e DB_PASSWORD=Qwerty@123 -e DB_NAME=mkbook mubeen507/book-store'
-                }
-            }
-        }
-	stage('Slack Notification') {
-	    steps {
-	        slackSend(
-	            channel: 'book-jenkins',
-	            color: '439FE0',
-	            message: "Job '${env.JOB_NAME}' build #${env.BUILD_NUMBER} - Your book store application deployed successfully!",
-	            teamDomain: 'konalms',
-	            tokenCredentialId: 'slack',
-	            username: 'jenkins'
-	        )
-	    }
-	}
+       # stage('Running the docker container') {
+           # steps {
+              #  script {
+                #    def existingBookContainer = sh(script: "docker ps -aqf name=book", returnStdout: true).trim()
+                 #   if (existingBookContainer) {
+                   #     sh "docker rm -f ${existingBookContainer}"
+                   # }
+                   # sh 'docker run -dt --name book --network booknetwork -p 80:80 -e DB_SERVERNAME=mysql -e DB_USERNAME=root -e DB_PASSWORD=Qwerty@123 -e DB_NAME=mkbook mubeen507/book-store'
+               # }
+            #}
+       # }
+	
 
     }
 }
